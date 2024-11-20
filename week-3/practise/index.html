@@ -9,22 +9,9 @@
     <script src='main.js'></script>
 </head>
 <body>
-    <input type="text" id="input" placeholder="Add Todo">
-    <button id="add" onclick="addTodo()">Add</button>
+    
 </body>
-    <script>
-        function addTodo() {
-            const val = document.getElementById("input").value;
-            const div = document.createElement("div");
-            div.innerHTML = val;
-            document.body.appendChild(div);
-            const del = document.createElement("button");
-            del.innerHTML = "X";
-            del.onclick = function() {
-                div.remove();
-                div.parentElement.removeChild(div);
-            }
-            document.body.appendChild(del);
-        }
-    </script>
+<script>
+
+</script>
 </html>
