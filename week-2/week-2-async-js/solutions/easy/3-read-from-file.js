@@ -16,7 +16,7 @@ fs.readFile('example.txt', 'utf8', (err, data) => {
 // Expensive operation: A simple, large computational task
 const expensiveOperation = () => {
   let sum = 0;
-  for (let i = 0; i < 1e8; i++) { 
+  for (let i = 0; i < 1000000000000; i++) { 
     sum += i;
   }
   console.log('Expensive operation done');
