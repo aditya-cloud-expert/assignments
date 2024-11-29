@@ -1,0 +1,10 @@
+ssh -p 2222 Pi@synapze.ddns.net -i k8-production-key #master
+ssh -p 2223 Pi@synapze.ddns.net -i k8-production-key #worker1
+ssh -p 2224 Pi@synapze.ddns.net -i k8-production-key #worker2
+ssh -p 2225 Pi@synapze.ddns.net -i k8-production-key #worker3
+
+K106b2a766d98a32298d4e2393219b23b12a9d56b105b5945042ba48d357db4f1bb::server:cbbc28f1d3a3d477bbf6d16b4a839012
+
+K10c6eb45b7e779efce45b2cb0ae63cee72f5b4f51282c57695108d1df652962d35::server:558d21964a03205f05739d2de85e534b
+curl -sfL https://get.k3s.io | K3S_URL="https://192.168.2.221:6443" K3S_TOKEN="K10c6eb45b7e779efce45b2cb0ae63cee72f5b4f51282c57695108d1df652962d35::server:558d21964a03205f05739d2de85e534b" sh -
+

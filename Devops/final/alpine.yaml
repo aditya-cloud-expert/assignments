@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongodb-debug
+  namespace: mongodb
+spec:
+  containers:
+  - name: debug
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    command: 
+      - /bin/sh
+      - -c
+      - "sleep infinity"
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "100m"
+      limits:
+        memory: "128Mi"
+        cpu: "200m"
