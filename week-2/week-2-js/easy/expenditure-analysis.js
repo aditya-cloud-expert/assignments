@@ -1,20 +1,27 @@
-/*
-  Implement a function `calculateTotalSpentByCategory` which takes a list of transactions as parameter
-  and return a list of objects where each object is unique category-wise and has total price spent as its value.
-  transactions is an array where each
-  Transaction - an object like 
-        {
-		id: 1,
-		timestamp: 1656076800000,
-		price: 10,
-		category: 'Food',
-		itemName: 'Pizza',
-	}
-  Output - [{ category: 'Food', totalSpent: 10 }] // Can have multiple categories, only one example is mentioned here
-*/
-
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  // Create a map to store total spent by category
+  const categoryMap = new Map();
+
+  // Iterate through each transaction
+  for (let i = 0; i < transactions.length; i++) {
+    const transaction = transactions[i];
+    const { category, price } = transaction;
+
+    // Update the total spent for the category
+    if (categoryMap.has(category)) {
+      categoryMap.set(category, categoryMap.get(category) + price);
+    } else {
+      categoryMap.set(category, price);
+    }
+  }
+
+  // Convert the map to an array of objects
+  const result = [];
+  for (const [category, totalSpent] of categoryMap) {
+    result.push({ category, totalSpent });
+  }
+
+  return result;
 }
 
 module.exports = calculateTotalSpentByCategory;
