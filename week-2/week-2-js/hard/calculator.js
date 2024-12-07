@@ -1,21 +1,68 @@
-/*
-  Implement a class `Calculator` having below methods
-    - initialise a result variable in the constructor and keep updating it after every arithmetic operation
-    - add: takes a number and adds it to the result
-    - subtract: takes a number and subtracts it from the result
-    - multiply: takes a number and multiply it to the result
-    - divide: takes a number and divide it to the result
-    - clear: makes the `result` variable to 0
-    - getResult: returns the value of `result` variable
-    - calculate: takes a string expression which can take multi-arithmetic operations and give its result
-      example input: `10 +   2 *    (   6 - (4 + 1) / 2) + 7`
-      Points to Note: 
-        1. the input can have multiple continuous spaces, you're supposed to avoid them and parse the expression correctly
-        2. the input can have invalid non-numerical characters like `5 + abc`, you're supposed to throw error for such inputs
+class Calculator {
+  constructor(result = 0) {
+    this.result = result; // Initialize the result variable
+  }
 
-  Once you've implemented the logic, test your code by running
-*/
+  // Method to add a number to the result
+  add(number) {
+    this.result += number;
+    return this.result;
+  }
 
-class Calculator {}
+  // Method to subtract a number from the result
+  subtract(number) {
+    this.result -= number;
+    return this.result;
+  }
+
+  // Method to multiply a number with the result
+  multiply(number) {
+    this.result *= number;
+    return this.result;
+  }
+
+  // Method to divide the result by a number
+  divide(number) {
+    if (number === 0) {
+      throw new Error("Division by zero is not allowed.");
+    }
+    this.result /= number;
+    return this.result;
+  }
+
+  // Method to clear the result variable
+  clear() {
+    this.result = 0;
+    return this.result;
+  }
+
+  // Method to return the current value of the result
+  getResult() {
+    return this.result;
+  }
+
+  // Method to calculate a string expression
+  calculate(expression) {
+    // Remove all whitespace and validate the expression
+    const sanitizedExpression = expression.replace(/\s+/g, ""); // Remove extra spaces
+    if (!/^[\d+\-*/().]+$/.test(sanitizedExpression)) {
+      throw new Error("Invalid characters in the expression.");
+    }
+
+    try {
+      // Use `eval` for evaluation, wrapped in a `Function` for added security
+      const evaluatedResult = Function(`'use strict'; return (${sanitizedExpression})`)();
+      if (isNaN(evaluatedResult)) {
+        throw new Error("Invalid expression.");
+      }
+      this.result = evaluatedResult;
+      return this.result;
+    } catch (error) {
+      throw new Error("Error evaluating the expression.");
+    }
+  }
+}
+
+// Testing the implementatio
 
 module.exports = Calculator;
