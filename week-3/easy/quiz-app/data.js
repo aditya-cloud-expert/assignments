@@ -33,3 +33,4 @@ export const quizData = [{
 },
 // you can add more quiz here
 ]
+
