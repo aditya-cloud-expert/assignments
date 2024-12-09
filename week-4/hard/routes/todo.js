@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const adminMiddleware = require("../middleware/user");
 const todorouter = Router();
-
+const { Todo } = require("../database/index")
 
 // todo Routes
 todorouter.post('/', (req, res) => {
@@ -29,4 +29,4 @@ todorouter.get('/:id', adminMiddleware, (req, res) => {
     // Implement fetching todo by id logic
 });
 
-module.exports = todorouter;
+module.exports = { todorouter }

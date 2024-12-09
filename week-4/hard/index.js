@@ -1,19 +1,22 @@
 const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
-const { todo, use } = require("./routes/todo")
-const { user } = require("./routes/user")
+
 const app = express();
 const port = process.env.PORT;
 
+const { userrouter } = require("./routes/user");
+const { todorouter } = require("./routes/todo");
 
+// Middleware to parse JSON requests
 app.use(express.json());
 
-app.get("/healthy", (req, res)=> res.send("I am Healthy"));
-app.use("/todo", todo)
-app.use("/user", user)
+// Use routers for respective routes
+app.use("/user", userrouter);
+app.use("/todo", todorouter);
 
-//  start writing your routes here
+// Health check route
+app.get("/healthy", (req, res) => res.send("I am Healthy"));
 
-app.listen(port, ()=> console.log(`server is running at http://localhost:${port}`));
-
+// Start the server
+app.listen(port, () => console.log(`Server is running at http://localhost:${port}`));
