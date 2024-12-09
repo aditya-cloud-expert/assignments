@@ -1,10 +1,14 @@
-//  Create a middleware that logs all incoming requests to the console.
-
 const express = require('express');
 const app = express();
 
 function logRequests(req, res, next) {
-    // write the logic for request log here
+    // Get timestamp in the required format
+    const timestamp = new Date().toISOString();
+    
+    // Log in the specific format: "METHOD /path - timestamp"
+    console.log(`${req.method} ${req.url} - ${timestamp}`);
+    
+    next();
 }
 
 app.use(logRequests);
