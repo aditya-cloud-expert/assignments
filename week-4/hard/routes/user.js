@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 
 const userMiddleware = require("../middleware/user");
 const { User } = require("../database/index")
+const { Todo } = require("../database/index")
 
 const userrouter = Router();
 dotenv.config();
@@ -91,9 +92,39 @@ userrouter.post('/login', async (req, res) => {
     }
  });
 
-userrouter.get('/todos', userMiddleware, (req, res) => {
-    // Implement logic for getting todos for a user
+userrouter.get('/todos', userMiddleware, async (req, res) => {
+    try {
+        // Get username from request (assuming userMiddleware adds it)
+        const username = req.body.username;
+        
+        if (!username) {
+            return res.status(401).json({
+                message: "Unauthorized - username not found"
+            });
+        }
+
+        // Find all todos for the specific user
+        const todos = await Todo.find({
+            where: {
+                username: username
+            }
+        });
+
+        // Return todos
+        return res.status(200).json({
+            todos: todos
+        });
+
+    } catch (error) {
+        console.error('Error fetching todos:', error);
+        
+        // Send appropriate error response
+        return res.status(500).json({
+            message: "Internal server error while fetching todos"
+        });
+    }
 });
+
 
 userrouter.post('/logout', userMiddleware, (req, res) => {
     // Implement logout logic
