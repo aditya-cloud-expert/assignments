@@ -17,6 +17,7 @@ function auth(req, res, next) {
 
         // Verify the token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
         if (!decoded) {
             return res.status(401).send({
                 message: "Token expired or invalid",
